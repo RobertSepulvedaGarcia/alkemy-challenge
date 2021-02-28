@@ -1,0 +1,18 @@
+.cont {
+    height: 100vh;
+}
+
+.row {
+    background-image: linear-gradient(white, skyblue, blue);
+    height: 100vh;
+}
+
+.column {
+    background-color: rgb(32, 178, 170, 0.4);
+    height: 10vh;
+}
+
+.column2 {
+    height: 90vh;
+    padding-top: 15px;
+}
