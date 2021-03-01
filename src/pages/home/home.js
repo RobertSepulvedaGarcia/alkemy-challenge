@@ -7,7 +7,7 @@ const home = () => {
   const { columns, rows } = data_mounts;
 
   return (
-    <Navbar>
+    <Navbar path="/form" title="Nuevo Registro">
       <p className="display-4">Los Ultimos 10</p>
       <Table
         style={{ textAlign: "center" }}
@@ -33,6 +33,7 @@ const home = () => {
               <td>{row.reason}</td>
               <td>{row.type}</td>
               <td>{row.money}</td>
+              <td>{row.date}</td>
               <td>{row.update}</td>
               <td>{row.delete}</td>
             </tr>

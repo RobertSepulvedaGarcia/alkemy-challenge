@@ -1,10 +1,11 @@
 import React from "react";
-
+import Navbar from "../../Components/Layout/Navbar/Navbar";
+import Formulary from "../../Components/Form/Formulary";
 const form = () => {
   return (
-    <>
-      <h1>OVER CATASTROPHE!!!!!</h1>
-    </>
+    <Navbar path="/" title="Regresar">
+      <Formulary />
+    </Navbar>
   );
 };
 

@@ -8,6 +8,7 @@
 }
 
 .column {
+    padding-top: 25px;
     background-color: rgb(32, 178, 170, 0.4);
     height: 10vh;
 }
