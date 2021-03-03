@@ -1,6 +1,3 @@
-import Delete from "../Components/DeleteButton/DeleteButton";
-import Update from "../Components/UpdateButton/UpdateButton";
-
 export const data_mounts = {
     columns: [{
             label: "#",
@@ -144,8 +141,6 @@ export const data_operations = {
             type: "egreso",
             money: 25000,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "2",
@@ -153,8 +148,6 @@ export const data_operations = {
             type: "ingreso",
             money: 25000,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "3",
@@ -162,8 +155,6 @@ export const data_operations = {
             type: "egreso",
             money: 3000,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "4",
@@ -171,8 +162,6 @@ export const data_operations = {
             type: "egreso",
             money: 40000,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "5",
@@ -180,8 +169,6 @@ export const data_operations = {
             type: "ingreso",
             money: 50000,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "6",
@@ -189,8 +176,6 @@ export const data_operations = {
             type: "egreso",
             money: 5000,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "7",
@@ -198,8 +183,6 @@ export const data_operations = {
             type: "ingreso",
             money: 50000,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "8",
@@ -207,8 +190,6 @@ export const data_operations = {
             type: "ingreso",
             money: 500000,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "9",
@@ -216,8 +197,6 @@ export const data_operations = {
             type: "egreso",
             money: 5200,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
         {
             id: "10",
@@ -225,8 +204,6 @@ export const data_operations = {
             type: "egreso",
             money: 1500,
             date: "20-02-2021",
-            Update,
-            Delete,
         },
     ],
 };

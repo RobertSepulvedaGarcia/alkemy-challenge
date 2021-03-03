@@ -1,14 +1,19 @@
 import React from "react";
+import { data_operations } from "../../utils/dataTable";
+import useGetRegister from "../../hooks/useGetRegister";
+import { dateFormat } from "../../utils/dateFormatter";
 import Navbar from "../../Components/Layout/Navbar/Navbar";
 import { Table } from "react-bootstrap";
+import Delete from "../../Components/DeleteButton/DeleteButton";
+import Update from "../../Components/UpdateButton/UpdateButton";
+const TableOperationsList = () => {
+  const { columns } = data_operations;
 
-import { data_operations } from "../../utils/dataTable";
-const tableOperationsList = () => {
-  const { columns, rows } = data_operations;
+  const { data } = useGetRegister("http://localhost:3001/maintainer");
 
   return (
     <Navbar path="/" title="ir a Home" bClass="d-none">
-      <p className="display-4">Tabla de operaciones</p>
+      <p className="display-4"> Tabla de operaciones </p>
       <Table
         style={{ textAlign: "center" }}
         responsive
@@ -21,26 +26,24 @@ const tableOperationsList = () => {
         <thead>
           <tr>
             {columns.map((column, index) => (
-              <th key={index}>{column.label}</th>
+              <th key={index}> {column.label} </th>
             ))}
           </tr>
         </thead>
-
         <tbody>
-          {rows.map((row, index) => {
-            const { Delete, Update } = row;
+          {data.map((row, index) => {
             return (
               <tr key={index}>
-                <td>{row.id}</td>
-                <td>{row.reason}</td>
-                <td>{row.type}</td>
-                <td>{row.money}</td>
-                <td>{row.date}</td>
-                <td>
-                  <Update />
-                </td>
+                <td> {row.ID} </td>
+                <td> {row.Concept} </td>
+                <td> {row.OperationType} </td>
+                <td> {row.Mount} </td>
+                <td> {dateFormat(new Date(row.DATE))} </td>
                 <td>
                   <Delete />
+                </td>
+                <td>
+                  <Update />
                 </td>
               </tr>
             );
@@ -51,4 +54,4 @@ const tableOperationsList = () => {
   );
 };
 
-export default tableOperationsList;
+export default TableOperationsList;

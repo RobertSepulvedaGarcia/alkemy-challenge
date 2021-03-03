@@ -1,14 +1,18 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { data_mounts } from "../../utils/dataTable";
+import { dateFormat } from "../../utils/dateFormatter";
+import useGetRegister from "../../hooks/useGetRegister";
 import Navbar from "../../Components/Layout/Navbar/Navbar";
 import "./home.css";
-const home = () => {
-  const { columns, rows } = data_mounts;
+const Home = () => {
+  const { columns } = data_mounts;
+
+  const { data } = useGetRegister("http://localhost:3001");
 
   return (
     <Navbar path="/form" title="Nuevo Registro">
-      <p className="display-4"> Los Ultimos 10 Registros </p>{" "}
+      <p className="display-4"> Los Ultimos 10 Registros </p>
       <Table
         style={{ textAlign: "center" }}
         responsive
@@ -25,10 +29,13 @@ const home = () => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
+          {data.map((row, index) => (
             <tr key={index}>
-              <td> {row.id} </td> <td> {row.reason} </td> <td> {row.type} </td>
-              <td> {row.money} </td> <td> {row.date} </td>
+              <td> {row.ID} </td>
+              <td> {row.Concept} </td>
+              <td> {row.OperationType} </td>
+              <td> {row.Mount} </td>
+              <td> {dateFormat(new Date(row.DATE))} </td>
             </tr>
           ))}
         </tbody>
@@ -41,4 +48,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;

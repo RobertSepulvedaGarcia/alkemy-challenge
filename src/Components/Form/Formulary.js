@@ -8,19 +8,35 @@ import "./Formulary.css";
 const { Group, Control, Label } = Form;
 const Formulary = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    }
+    event.preventDefault();
+    setValidated(true);
+
+    console.log(event.target[2].value);
+  };
+
   registerLocale("es", es);
   return (
     <Container fluid className="containerForm">
       <h2 className="h2"> Nuevo Registro </h2>
-      <Form>
+
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Group>
           <Label> Concepto </Label>
-          <Control type="text" placeholder="Describa el concepto" />
+          <Control required type="text" placeholder="Describa el concepto" />
         </Group>
+
         <Group>
           <Label> Monto </Label>
-          <Control type="text" placeholder="Describa el monto" />
+          <Control required type="text" placeholder="Describa el monto" />
         </Group>
+
         <Group>
           <Label> Fecha </Label>
           <Col style={{ padding: 0 }}>
@@ -33,12 +49,16 @@ const Formulary = () => {
             />
           </Col>
         </Group>
+
         <Group>
           <Label> Tipo de operacion </Label>
-          <Control as="select" custom>
-            <option> Ingreso </option> <option> Egreso </option>
+          <Control required as="select" custom>
+            <option> {null} </option>
+            <option> Ingreso </option>
+            <option> Egreso </option>
           </Control>
         </Group>
+
         <Button variant="primary" type="submit">
           <AiFillSave />
           Agregar
