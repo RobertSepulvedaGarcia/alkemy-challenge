@@ -1,24 +1,41 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Col } from "react-bootstrap";
 import DatePicker, { registerLocale } from "react-datepicker";
+
+import dateFormat from "dateformat";
+import { newRegister } from "../../api/register/index";
 import { AiFillSave } from "react-icons/ai";
 import es from "date-fns/locale/es";
 
 import "./Formulary.css";
 const { Group, Control, Label } = Form;
 const Formulary = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [validated, setValidated] = useState(false);
+  const [state, setState] = useState({
+    concept: "",
+    mount: 0,
+    date: new Date(),
+    operationType: "",
+  });
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
+  const { concept, mount, date, operationType } = state;
+
+  const handleChange = ({ target: { name, value } }) => {
+    let aux = { ...state };
+
+    aux[name] = value;
+
+    setState(aux);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = { concept, mount, date, operationType };
+      await newRegister(data);
+      console.log("guardado con exito");
+    } catch (error) {
+      console.log(error);
     }
-    event.preventDefault();
-    setValidated(true);
-
-    console.log(event.target[2].value);
   };
 
   registerLocale("es", es);
@@ -26,36 +43,60 @@ const Formulary = () => {
     <Container fluid className="containerForm">
       <h2 className="h2"> Nuevo Registro </h2>
 
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Group>
           <Label> Concepto </Label>
-          <Control required type="text" placeholder="Describa el concepto" />
+          <Control
+            name="concept"
+            required
+            type="text"
+            onChange={handleChange}
+            placeholder="Describa el concepto"
+          />
         </Group>
 
         <Group>
           <Label> Monto </Label>
-          <Control required type="text" placeholder="Describa el monto" />
+          <Control
+            name="mount"
+            required
+            type="text"
+            onChange={handleChange}
+            placeholder="Describa el monto"
+          />
         </Group>
 
         <Group>
           <Label> Fecha </Label>
           <Col style={{ padding: 0 }}>
             <DatePicker
+              name="date"
               className="datePicker"
-              dateFormat="yyyy-MM-dd"
+              dateFormat="dd/MM/yyyy"
               locale="es"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={date}
+              onChange={(e) => {
+                const date = dateFormat(e, "isoDateTime");
+
+                const valor = { target: { name: "date", value: date } };
+                handleChange(valor);
+              }}
             />
           </Col>
         </Group>
 
         <Group>
           <Label> Tipo de operacion </Label>
-          <Control required as="select" custom>
+          <Control
+            onChange={handleChange}
+            name="operationType"
+            required
+            as="select"
+            custom
+          >
             <option> {null} </option>
-            <option> Ingreso </option>
-            <option> Egreso </option>
+            <option value="Ingreso"> Ingreso </option>
+            <option value="Egreso"> Egreso </option>
           </Control>
         </Group>
 
