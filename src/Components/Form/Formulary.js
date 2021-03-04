@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Col } from "react-bootstrap";
 import DatePicker, { registerLocale } from "react-datepicker";
-
-import dateFormat from "dateformat";
 import { newRegister } from "../../api/register/index";
 import { AiFillSave } from "react-icons/ai";
 import es from "date-fns/locale/es";
-
 import "./Formulary.css";
 const { Group, Control, Label } = Form;
 const Formulary = () => {
+  const [startDate, setStartDate] = useState(new Date());
+
   const [state, setState] = useState({
     concept: "",
     mount: 0,
-    date: new Date(),
+    date: new Date().toISOString().split("T", 1)[0],
     operationType: "",
   });
 
   const { concept, mount, date, operationType } = state;
 
   const handleChange = ({ target: { name, value } }) => {
+    if (name === "mount") {
+      value = Number(value);
+    }
+
     let aux = { ...state };
 
     aux[name] = value;
@@ -27,12 +30,21 @@ const Formulary = () => {
     setState(aux);
   };
 
+  const handleDate = (d) => {
+    let fecha = d.toISOString().split("T", 1)[0];
+    let aux = { ...state };
+    aux.date = fecha;
+
+    setStartDate(d);
+    setState(aux);
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
+      e.preventDefault();
       const data = { concept, mount, date, operationType };
+      console.log(`data antes del fetch:${data}`);
       await newRegister(data);
-      console.log("guardado con exito");
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +54,6 @@ const Formulary = () => {
   return (
     <Container fluid className="containerForm">
       <h2 className="h2"> Nuevo Registro </h2>
-
       <Form onSubmit={handleSubmit}>
         <Group>
           <Label> Concepto </Label>
@@ -54,7 +65,6 @@ const Formulary = () => {
             placeholder="Describa el concepto"
           />
         </Group>
-
         <Group>
           <Label> Monto </Label>
           <Control
@@ -65,7 +75,6 @@ const Formulary = () => {
             placeholder="Describa el monto"
           />
         </Group>
-
         <Group>
           <Label> Fecha </Label>
           <Col style={{ padding: 0 }}>
@@ -74,17 +83,11 @@ const Formulary = () => {
               className="datePicker"
               dateFormat="dd/MM/yyyy"
               locale="es"
-              selected={date}
-              onChange={(e) => {
-                const date = dateFormat(e, "isoDateTime");
-
-                const valor = { target: { name: "date", value: date } };
-                handleChange(valor);
-              }}
+              selected={startDate}
+              onChange={handleDate}
             />
           </Col>
         </Group>
-
         <Group>
           <Label> Tipo de operacion </Label>
           <Control
@@ -94,12 +97,10 @@ const Formulary = () => {
             as="select"
             custom
           >
-            <option> {null} </option>
-            <option value="Ingreso"> Ingreso </option>
+            <option> {null} </option> <option value="Ingreso"> Ingreso </option>
             <option value="Egreso"> Egreso </option>
           </Control>
         </Group>
-
         <Button variant="primary" type="submit">
           <AiFillSave />
           Agregar

@@ -1,19 +1,15 @@
-.cont {
-    height: 100vh;
-}
-
-.row {
-    background-image: linear-gradient(white, skyblue, blue);
+#root {
     height: 100vh;
 }
 
 .column {
     padding-top: 25px;
+    padding-bottom: 25px;
     background-color: rgb(32, 178, 170, 0.4);
-    height: 10vh;
+    height: 15%;
 }
 
 .column2 {
-    height: 90vh;
+    height: 100%;
     padding-top: 15px;
 }

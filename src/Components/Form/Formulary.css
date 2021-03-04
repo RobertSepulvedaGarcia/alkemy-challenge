@@ -21,3 +21,12 @@
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     outline: #7cc3f4 solid 4px;
 }
+
+@media only screen and (max-width: 1024px) {
+    .containerForm {
+        background: rgba(0, 255, 255, 0.3);
+        width: 100%;
+        border-radius: 13px;
+        padding-bottom: 15%;
+    }
+}

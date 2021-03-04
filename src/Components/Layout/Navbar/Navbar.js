@@ -5,8 +5,8 @@ import "./Navbar.css";
 import { Container, Row, Col } from "react-bootstrap";
 const Navbar = ({ children, path, title, bClass }) => {
   return (
-    <Container className="cont" fluid>
-      <Row className="row justify-content-md-center">
+    <Container fluid>
+      <Row className="justify-content-md-center">
         <Col className="column" xs={12}>
           <NavButton path={path} title={title} />
 
@@ -16,7 +16,7 @@ const Navbar = ({ children, path, title, bClass }) => {
             bClass={bClass}
           />
         </Col>
-        <Col className="column2" xs={8}>
+        <Col className="column2" xs={12} sm={12} md={12} lg={12}>
           {children}
         </Col>
       </Row>

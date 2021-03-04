@@ -2,6 +2,7 @@ import React from "react";
 import { data_operations } from "../../utils/dataTable";
 import useGetRegister from "../../hooks/useGetRegister";
 import { dateFormat } from "../../utils/dateFormatter";
+import { mountFormatter } from "../../utils/mountFormatter";
 import Navbar from "../../Components/Layout/Navbar/Navbar";
 import { Table } from "react-bootstrap";
 import Delete from "../../Components/DeleteButton/DeleteButton";
@@ -12,7 +13,7 @@ const TableOperationsList = () => {
   const { data } = useGetRegister("http://localhost:3001/maintainer");
 
   return (
-    <Navbar path="/" title="ir a Home" bClass="d-none">
+    <Navbar path="/" title="ir a Home" bClass="d-none" info={data}>
       <p className="display-4"> Tabla de operaciones </p>
       <Table
         style={{ textAlign: "center" }}
@@ -26,7 +27,7 @@ const TableOperationsList = () => {
         <thead>
           <tr>
             {columns.map((column, index) => (
-              <th key={index}> {column.label} </th>
+              <th key={index}>{column.label}</th>
             ))}
           </tr>
         </thead>
@@ -34,16 +35,16 @@ const TableOperationsList = () => {
           {data.map((row, index) => {
             return (
               <tr key={index}>
-                <td> {row.ID} </td>
-                <td> {row.Concept} </td>
-                <td> {row.OperationType} </td>
-                <td> {row.Mount} </td>
-                <td> {dateFormat(new Date(row.DATE))} </td>
+                <td>{row.ID}</td>
+                <td>{row.Concept}</td>
+                <td>{row.OperationType}</td>
+                <td>${mountFormatter(row.Mount)}</td>
+                <td>{dateFormat(new Date(row.DATE))}</td>
                 <td>
-                  <Delete />
+                  <Delete id={row.ID} />
                 </td>
                 <td>
-                  <Update />
+                  <Update data={row} />
                 </td>
               </tr>
             );

@@ -1,10 +1,11 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
-const DeleteButton = () => {
+import { deleteRegister } from "../../api/delete/delete";
+const DeleteButton = ({ id }) => {
   return (
     <>
-      <Button variant="danger">
+      <Button variant="danger" onClick={() => deleteRegister(id)}>
         <AiFillDelete />
         Eliminar
       </Button>

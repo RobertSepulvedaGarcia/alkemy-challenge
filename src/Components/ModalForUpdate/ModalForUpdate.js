@@ -1,15 +1,10 @@
-import React, { useState } from "react";
-import { Modal, Form, Button, Col } from "react-bootstrap";
-import DatePicker, { registerLocale } from "react-datepicker";
-import { AiFillSave } from "react-icons/ai";
-import es from "date-fns/locale/es";
+import React from "react";
+import { Modal } from "react-bootstrap";
+import FormularyUpdate from "../../Components/Form/FormularyUpdate";
 import "./ModalForUpdate.css";
-const { Title, Header, Body, Footer } = Modal;
-const { Group, Control, Label } = Form;
+const { Title, Header, Body } = Modal;
 
-const ModalForUpdate = ({ showing, hiding }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  registerLocale("es", es);
+const ModalForUpdate = ({ showing, hiding, data }) => {
   return (
     <Modal
       size="lg"
@@ -22,34 +17,8 @@ const ModalForUpdate = ({ showing, hiding }) => {
         <Title> Editar </Title>
       </Header>
       <Body>
-        <Form>
-          <Group>
-            <Label> Concepto </Label>
-            <Control type="text" placeholder="Describa el concepto" />
-          </Group>
-          <Group>
-            <Label> Monto </Label>
-            <Control type="text" placeholder="Describa el monto" />
-          </Group>
-          <Group>
-            <Label> Fecha </Label>
-            <Col style={{ padding: 0 }}>
-              <DatePicker
-                className="datePicker-modal"
-                locale="es"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-            </Col>
-          </Group>
-        </Form>
+        <FormularyUpdate data={data} />
       </Body>
-      <Footer>
-        <Button onClick={hiding}>
-          <AiFillSave />
-          Guardar Cambios
-        </Button>
-      </Footer>
     </Modal>
   );
 };
