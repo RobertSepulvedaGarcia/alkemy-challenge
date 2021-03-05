@@ -35,26 +35,25 @@ const Home = (props) => {
         <tbody>
           {data.map((row, index) => (
             <tr key={index}>
-              <td> {row.ID} </td>
-              <td> {row.Concept} </td>
+              <td> {row.ID} </td> <td> {row.Concept} </td>
               <td> {row.OperationType} </td>
-              <td> ${mountFormatter(row.Mount)} </td>
+              <td> $ {mountFormatter(row.Mount)} </td>
               <td> {dateFormat(new Date(row.DATE))} </td>
             </tr>
           ))}
         </tbody>
       </Table>
       <p style={{ fontWeight: "bold" }}>
-        Total Ingresos: ${mountFormatter(totalIncomes)}
+        Total Ingresos: $ {mountFormatter(totalIncomes)}
       </p>
       <p style={{ fontWeight: "bold" }}>
-        Total Egresos: ${mountFormatter(totalExpences)}{" "}
+        Total Egresos: $ {mountFormatter(totalExpences)}
       </p>
       <p
         className="display-3"
-        style={totalBalance <= 0 ? { color: "red" } : { color: "skyblue" }}
+        style={totalBalance <= 0 ? { color: "violet" } : { color: "skyblue" }}
       >
-        Total Balance: ${mountFormatter(totalBalance)}
+        Total Balance: $ {mountFormatter(totalBalance)}
       </p>
     </Navbar>
   );
