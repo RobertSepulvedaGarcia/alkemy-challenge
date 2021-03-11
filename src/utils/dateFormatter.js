@@ -1,35 +1,17 @@
 export const dateFormat = (fecha) => {
-    let mes = fecha.getMonth() + 1;
+    let mes = parseInt(fecha.getMonth() + 1);
     const anio = fecha.getFullYear();
-    let dia = fecha.getUTCDate();
+    let dia = parseInt(fecha.getUTCDate());
 
-    if (parseInt(dia) >= 1 && parseInt(dia) <= 9) {
+    if (dia >= 1 && dia <= 9) {
         dia = 0 + dia.toString();
     }
 
-    if (parseInt(mes) >= 1 && parseInt(mes) <= 9) {
+    if (mes >= 1 && mes <= 9) {
         mes = 0 + mes.toString();
     }
 
-    const fechaFinal = dia + "/" + mes + "/" + anio;
-
-    return fechaFinal;
-};
-
-export const dateFormatBack = (fecha) => {
-    let mes = fecha.getMonth() + 1;
-    const anio = fecha.getFullYear();
-    let dia = fecha.getUTCDate();
-
-    if (parseInt(dia) >= 1 && parseInt(dia) <= 9) {
-        dia = 0 + dia.toString();
-    }
-
-    if (parseInt(mes) >= 1 && parseInt(mes) <= 9) {
-        mes = 0 + mes.toString();
-    }
-
-    const fechaFinal = `${anio}-${mes}-${dia}`;
+    const fechaFinal = `${dia}/${mes}/${anio}`;
 
     return fechaFinal;
 };
