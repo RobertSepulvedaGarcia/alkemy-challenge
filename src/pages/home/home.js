@@ -7,7 +7,7 @@ import { returnTotals } from "../../utils/returnTotals";
 import { mountFormatter } from "../../utils/mountFormatter";
 import Navbar from "../../Components/Layout/Navbar/Navbar";
 import "./home.css";
-const Home = (props) => {
+const Home = () => {
   const { columns } = data_mounts;
 
   const { data } = useGetRegister("http://localhost:3001");
